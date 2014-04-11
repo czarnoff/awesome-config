@@ -26,13 +26,15 @@ modkey = "Mod4" -- your windows/apple key
 terminal = whereis_app('urxvtcd') and 'urxvtcd' or 'x-terminal-emulator' -- also accepts full path
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+xrandfix_cmd = terminal .. " -e " .. os.getenv("HOME") .. "/bin/fn-f7-emergency.sh"
+xrandx_cmd = terminal .. " -e " .. os.getenv("HOME") .. "/bin/fn-f7-switch.sh"
 
 wallpaper_app = "feh" -- if you want to check for app before trying
 wallpaper_dir = os.getenv("HOME") .. "/Pictures/Wallpaper" -- wallpaper dir
 
 -- taglist numerals
 --- arabic, chinese, {east|persian}_arabic, roman, thai, random
-taglist_numbers = "chinese" -- we support arabic (1,2,3...),
+taglist_numbers = "roman" -- we support arabic (1,2,3...),
 
 cpugraph_enable = true -- Show CPU graph
 cputext_format = " $1%" -- %1 average cpu, %[2..] every other thread individually
@@ -432,6 +434,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1)         end),
     awful.key({ modkey,           }, "space", function () awful.layout.inc(layouts,  1) end),
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
+
+    awful.key({ modkey,           }, "p", function () awful.util.spawn(xrandx_cmd) end),
+    awful.key({ modkey, "Control" }, "p", function () awful.util.spawn(xrandfix_cmd) end),
 
     awful.key({ modkey }, "b", function ()
          wibox[mouse.screen].visible = not wibox[mouse.screen].visible
